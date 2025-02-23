@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "296565224760",
+    "project_id": "id-scanner-5ed4a",
+    "storage_bucket": "id-scanner-5ed4a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296565224760:android:d1d963bd4b3c029fee7dcd",
+        "android_client_info": {
+          "package_name": "com.example.quran_wireframe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYk0QQmyZ4IUkdoFDERyP2mSYcVzHOE_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
