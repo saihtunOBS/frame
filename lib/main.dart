@@ -1,22 +1,24 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quran_wireframe/app_data/app_data.dart';
 import 'package:quran_wireframe/app_data/theme_data.dart';
 
 import 'routes/route_helper.dart';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'app_binding/app_binding.dart' as dep;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await GetStorage.init();
   await dep.init();
   if (AppData.shared.getThemeMode() == 'light') {
@@ -29,6 +31,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   // This widget is the root of your application.
   @override
@@ -38,7 +43,20 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      home: ScannerN(),
+      home: Center(
+        child: ElevatedButton(
+            onPressed: () async {
+              await FirebaseAnalytics.instance.logEvent(
+                name: "USER",
+              ).whenComplete((){
+                print('success');
+              }).catchError((e){
+                print(e.toString());
+              });
+            },
+            child: Text('Test')),
+      ),
+      navigatorObservers: <NavigatorObserver>[observer],
       initialRoute: RouteHelper.splash,
       getPages: RouteHelper.routes,
     );

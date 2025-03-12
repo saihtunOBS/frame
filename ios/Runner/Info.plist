@@ -12,6 +12,8 @@
         <string>A0000002480300</string>
         <string>A00000045645444C2D3031</string>
     </array>
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <true/>
     <key>NFCReaderUsageDescription</key>
     <string>NFC tag to read NDEF messages</string>
 	<key>CFBundleDevelopmentRegion</key>
