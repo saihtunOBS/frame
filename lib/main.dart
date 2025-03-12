@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quran_wireframe/app_data/app_data.dart';
 import 'package:quran_wireframe/app_data/theme_data.dart';
+import 'package:quran_wireframe/firebase_options.dart';
 
 import 'routes/route_helper.dart';
 
@@ -18,7 +19,9 @@ import 'app_binding/app_binding.dart' as dep;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   await GetStorage.init();
   await dep.init();
   if (AppData.shared.getThemeMode() == 'light') {
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
               ).whenComplete((){
                 print('success');
               }).catchError((e){
-                print(e.toString());
+                print('object');
               });
             },
             child: Text('Test')),
